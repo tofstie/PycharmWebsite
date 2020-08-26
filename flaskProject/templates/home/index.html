@@ -1,0 +1,75 @@
+
+{% extends "shared/_layout.html" %}
+{% block title %} Home Page {% endblock %}
+
+
+{% block main_content %}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="/static/js/editChart.js"></script>
+    <div class="Hero">
+        <h1>Tyson's Temp Page</h1>
+        <input type="text" placeholder= "Search projects" class="form-control">
+        or <a href="#">browse projects</a>
+    </div>
+
+    <div class="pypi-stats">
+        <div class="stat">-1 projects</div>
+        <div class="stat">-1 release</div>
+        <div class="stat">-1 users</div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>New Releases</h2>
+                <div>Hot off the press: the newest project releases</div>
+                <canvas id="myChart"></canvas>
+                <script src="/static/js/linechart.js"></script>
+            </div>
+            <div class="col-md-6">
+            <div class="userOptions">
+                <input type="checkbox" id="TNG" name="Energy Type" value="TNG">
+                <label for="TNG">TNG</label>
+                <input type="checkbox" id="MC" name="Energy Type" value="MC" checked>
+                <label for="MC">MC</label>
+                <input type="checkbox" id="DCR" name="Energy Type" value="DCR">
+                <label for="DCR">DCR</label>
+            </div>
+            </div>
+            <div class="col-md-4">
+                <label for="startDate">Start Date: </label>
+                <input type="text" placeholder="2019-12-31 12:00 PM" onfocus="(this.type='datetime-local')"
+                       onblur="(this.type='text')" id="startDate">
+                <label for="endDate">End Date:</label>
+                <input type="text" placeholder="2020-07-31 12:00 PM" onfocus="(this.type='datetime-local')"
+                       onblur="(this.type='text')" id="endDate">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-sm btn-danger">Update Graph</button>
+                <script>
+                    $(document).ready(function(){
+                        $("#TNG").change(function(){
+                            if (document.getElementById("TNG").checked){
+                                insertDataset(chart, 'TNG', [20,50,30,60,40,70,50])
+                            } else if (document.getElementById("TNG").checked == false) {
+                                removeDataset(chart, 'TNG')
+                            }
+
+                        });
+                        $("#MC").change(function(){
+                            if (document.getElementById("MC").checked){
+                                insertDataset(chart, 'MC', [0, 10, 5, 2, 20, 30, 45])
+                            } else if (document.getElementById("MC").checked == false) {
+                                removeDataset(chart, 'MC')
+                            }
+
+                        });
+                    });
+                </script>
+
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
